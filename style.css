@@ -5,9 +5,7 @@
   font-family: 'Lato', sans-serif;
 }
 
-body{
-  background-color: lightgoldenrodyellow
-}
+
 
 a, a:hover{
 
@@ -17,8 +15,7 @@ a, a:hover{
 
 .container{
 
-  width: 500px;
-  margin: auto;
+  width:100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,21 +26,20 @@ a, a:hover{
   width: 100%;
 }
 
+
+
 #mese{
-  color: darkred;
+  color:cadetblue;
   text-align: center;
-  margin-bottom:
+  margin-right:15px;
 }
 
-.holiday{
 
-  color: red;
-  font-weight: 700
-}
 
 .arrows{
 
-  padding: 20px 0;
+  padding: 5px 100px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,15 +49,159 @@ a, a:hover{
   font-size: 30px;
 }
 
+.arrows .fas.fa-arrow-left{
+  display: none;
+}
+
 .arrows .fas:hover{
 
-  color:orangered;
+  color: rgba(0,0,0,0.7);
+}
+
+.arrows .fas.fa-caret-down{
+
+  font-size:24px;
+}
+
+#month-menu{
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position:relative;
+}
+
+#month-menu .menu{
+
+  display: none;
+  width: 150px;
+  max-height: 205px;
+  overflow-y: scroll;
+  padding: 5px 0 ;
+  position: absolute;
+  top:50px;
+  right:0;
+  z-index: 2;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+}
+
+/* Scroll bar  */
+
+.scroll::-webkit-scrollbar {
+
+    width: 3px;
+}
+
+.scroll::-webkit-scrollbar-track{
+
+  background-color: white;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+
+  background-color: #CCCCCC;
+  outline: 1px solid slategrey;
+}
+
+/* ----- */
+
+#month-menu .menu .item{
+
+  text-align: center;
+  padding:10px;
+  transition: background-color 0.1s;
+}
+
+#month-menu .menu .item:hover{
+
+  background-color: #F4F5F5
+}
+
+#month-menu .menu .item.active{
+
+  font-weight: 700;
+  color:cadetblue
 }
 
 #giorni{
 
-  padding-left: 125px;
+  width: 100%;
+  height: calc( 100vh - 50px);
+  padding: 5px;
 }
-#giorni li{
-padding: 2px 0;
+
+#giorni .row{
+
+  width: 100%;
+  height: calc( 100% / 6);
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.day{
+
+  background-color: white
+}
+
+#giorni .row .day{
+
+  width: calc( 100% / 6);
+  height: 100%;
+  border: 1px solid #F4F5F5;/*#F4F5F5*/
+  border-bottom: none;
+  border-left: none;
+  position: relative;
+}
+
+#giorni .row:first-child .day{
+
+  border-top: none;
+}
+
+#giorni .row .day:last-child {
+
+  border-right: none;
+  color: red;
+}
+
+#giorni .row .day{
+
+  transition: all 0.15s ;
+  cursor: pointer;
+}
+
+#giorni .row .day:not(.otherMonth):hover{
+
+  border: 1px solid black;
+  transform: scale(1.02);
+  z-index:1;
+}
+
+.day .data{
+
+ padding: 5px;
+ font-size: 13px;
+}
+
+.day .festa{
+
+  position: absolute;
+  bottom:5px;
+  right:5px;
+  text-align: center;
+  font-size: 14px;
+  color: midnightblue;
+  font-weight: 700;
+}
+
+.day.holiday{
+
+  background-color: #F5F9FF
+}
+
+#giorni .row .day.otherMonth{
+
+  color: lightgrey
 }
