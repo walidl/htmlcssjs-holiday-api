@@ -34,11 +34,7 @@ function isHoliday(d,holy){
       var date = holy[i].date;
       var fest = holy[i].name;
 
-      if(d  == date) {
-
-
-        return fest;
-      }
+      if(d  == date)  return fest;
 
   }
   return "";
@@ -55,18 +51,13 @@ function printDays(anno,mese,holy){
 
   var template = $("#days-template").html();
   var comp = Handlebars.compile(template);
-  var offSet = 0
+
+  //Clono il mom e ricavo il weekday del primo giorno del mese (date(1))
+  var offSet = moment(mom).date(1).isoWeekday() - 1;
 
   for (var i = 0; i < days; i++) {
 
     mom.date(i+1);
-
-    // prendo il weekday numb del primo giorno del mese come offSet per cominciare a riempire i giorni
-
-    if( i == 0 ) {
-      offSet = mom.isoWeekday() - 1;
-      // console.log(offSet);
-    }
 
     var infoDate = {
 
@@ -193,26 +184,6 @@ function printRows(anno, mese){
 
 }
 
-// chiama le funzioni che creano righe, titolo e giorni.
-function callPrints(year,month){
-
-  printRows(year,month);
-  printTitle(year,month);
-  getHolydays(year,month);
-}
-
-
-// se la freccia che ho cliccato mi porta al limite del 2018 ,
-//la nascondo
-
-function checkForLimits(num, elem){
-
-  if(num == 0 || num == 11){
-
-    elem.hide();
-  }
-}
-
 // Update del valore attivo de menu a tendina
 function updateActiveItem(it, act){
 
@@ -248,7 +219,9 @@ function choseMonth(y,m){
       callPrints(y,m)
     }
 
-    checkForLimits(m, $(this) );
+    // se la freccia che ho cliccato mi porta al limite del 2018 la nascondo
+    if(m == 0 || m == 11){  $(this).hide(); }
+
     updateActiveItem(item, item.eq(m));
 
   })
@@ -286,6 +259,14 @@ function clickMenu(){
 
     $("#month-menu").children(".menu").slideUp(300);
   });
+}
+
+// chiama le funzioni che creano righe, titolo e giorni.
+function callPrints(year,month){
+
+  printRows(year,month);
+  printTitle(year,month);
+  getHolydays(year,month);
 }
 
 function init(){
